@@ -126,7 +126,43 @@ fetchDonuts().then(element => {
         })
     })
 
+    //EJERCICIO 3
+     console.log();
+     console.log();
+     console.log(`                    EJERCICIO 3               `);
+     console.log("----------------------------------------------");
 
+    donut.forEach(donut => {
+        const name = donut.name;
+        const batters = donut.batters.batter;
+        
+        console.log(`Donut: ${name}`);
+        console.log("Butter mass:");
+        
+        batters.forEach(mass => {
+            const type = mass.type;
+            console.log(`* ${type}`);
+        });
+
+        console.log(`------------------------`);
+    })
+
+    donut.forEach(donut => {
+        const name = donut.name;
+        const topping = donut.topping;
+        
+        console.log(`Donut: ${name}`);
+        console.log("Extra topping:");
+        
+        topping.forEach(topping => {
+            const type = topping.type;
+            console.log(`* ${type}`);
+        });
+
+        console.log(`------------------------`);
+    })
+
+    
 
 }).catch(error => {
     console.error("Error al obtener los datos:", error);
