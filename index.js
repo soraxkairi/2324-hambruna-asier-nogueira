@@ -73,14 +73,64 @@ fetchDonuts().then(element => {
         }
       });
     console.log(`El donut con menos fibra es:${donutWithLessFiber.name} con un ${minFiberAmount}%`);
+
+
+    //EJERCICIO 2
+    console.log();
+    console.log();
+    console.log(`                    EJERCICIO 2               `);
+    console.log("----------------------------------------------");
+
+
+
+    console.log("MOSTRAR DONUTS Y CALORIAS:")
+    donut.forEach(donut => {
+        const name = donut.name;
+        const calories = donut.nutrition_facts.nutrition.calories;
+        console.log(`Donut:${name} & Calories:${calories}`);
+    })
+    console.log("MOSTRAR DONUTS Y SUS CARBOHIDRATOS:")
+  
+    donut.forEach(donut => {
+        const name = donut.name;
+        const carbohydrates = donut.nutrition_facts.nutrition.carbohydrate.carbs_detail;
+        
+        console.log(`Donut:${name} & Carbohidratos:`);
+        console.log(carbohydrates);
+      });
+
+    let totalCalories = 0;
+
+    donut.forEach(donut => {
+    const calories = donut.nutrition_facts.nutrition.calories;
+    totalCalories += calories;
+      });
+    const mediaCalories = totalCalories / donut.length;
+    console.log(`La media de calorias con todos los donuts es de:${mediaCalories} calorias`);
+
+    let saturatedCalories = 0;
     
+    donut.forEach(donut => {
+        const saturated = parseFloat(donut.nutrition_facts.nutrition.fat.fat_type.saturated.replace("g", ""));
+        saturatedCalories += saturated;
+    });
+    console.log(`La suma de todas las grasas saturadas es de ${saturatedCalories}g`);
+
+
+    //FALTA REMATAR
+    donut.forEach(donut => {
+        const vitamines = donut.nutrition_facts.nutrition.vitamines;
+        vitamines.forEach(vitamine => {
+            const vitamineName = vitamine.name;
+            const percentage = parseFloat(vitamine.percent.replace("%",""));
+        })
+    })
+
+
 
 }).catch(error => {
     console.error("Error al obtener los datos:", error);
 });
-
-
-//EJERCICIO2
 
 
 
