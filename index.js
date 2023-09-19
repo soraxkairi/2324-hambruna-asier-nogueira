@@ -64,13 +64,12 @@ fetchDonuts().then(element => {
     
     donut.forEach(donut => {
         const carbsDetail = donut.nutrition_facts.nutrition.carbohydrate.carbs_detail;
-        if (carbsDetail && carbsDetail.type && carbsDetail.type.fibre) {
           const fiberAmount = parseFloat(carbsDetail.type.fibre.replace("g", ""));
           if ( fiberAmount <= minFiberAmount) {
             minFiberAmount = fiberAmount;
             donutWithLessFiber = donut;
           }
-        }
+        
       });
     console.log(`El donut con menos fibra es:${donutWithLessFiber.name} con un ${minFiberAmount}%`);
 
@@ -129,7 +128,8 @@ fetchDonuts().then(element => {
     //EJERCICIO 3
      console.log();
      console.log();
-     console.log(`                    EJERCICIO 3               `);
+     console.log();
+     console.log(`                    EJERCICIO 2               `);
      console.log("----------------------------------------------");
 
     donut.forEach(donut => {
@@ -149,8 +149,9 @@ fetchDonuts().then(element => {
 
     donut.forEach(donut => {
         const name = donut.name;
-        const topping = donut.topping;
-        
+        console.log();
+        console.log();
+        console.log(`                    EJERCICIO 3               `);
         console.log(`Donut: ${name}`);
         console.log("Extra topping:");
         
@@ -162,7 +163,33 @@ fetchDonuts().then(element => {
         console.log(`------------------------`);
     })
 
+    //EJERCICIO4
+    console.log();
+    console.log();
+    console.log(`                    EJERCICIO 4               `);
+    console.log("----------------------------------------------");
+
+    let maxSilverCoin = 4;
+    let silverRemaining = [];
+    const priceUni = donut.map(donut => donut.ppu);
+    console.log(priceUni);
     
+    const boughtDonuts = priceUni.map((price) => {
+        maxSilverCoin = 4;
+        const quantity = Math.floor(maxSilverCoin / price);
+        maxSilverCoin -= quantity * price;
+        silverRemaining.push(maxSilverCoin);
+        return quantity;
+    })
+    
+    donut.forEach((donut,index) => {
+        const name = donut.name;
+        const boughtAmount = boughtDonuts[index];
+        console.log(`Name:${name} & Cantidad comprada ${boughtAmount}`);
+        console.log(`Dinero sobrante: ${silverRemaining[index]} monedas de plata`);
+        
+    })
+
 
 }).catch(error => {
     console.error("Error al obtener los datos:", error);
