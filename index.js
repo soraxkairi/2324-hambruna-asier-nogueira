@@ -64,23 +64,136 @@ fetchDonuts().then(element => {
     
     donut.forEach(donut => {
         const carbsDetail = donut.nutrition_facts.nutrition.carbohydrate.carbs_detail;
-        if (carbsDetail && carbsDetail.type && carbsDetail.type.fibre) {
           const fiberAmount = parseFloat(carbsDetail.type.fibre.replace("g", ""));
           if ( fiberAmount <= minFiberAmount) {
             minFiberAmount = fiberAmount;
             donutWithLessFiber = donut;
           }
-        }
+        
       });
     console.log(`El donut con menos fibra es:${donutWithLessFiber.name} con un ${minFiberAmount}%`);
+
+
+    //EJERCICIO 2
+    console.log();
+    console.log();
+    console.log(`                    EJERCICIO 2               `);
+    console.log("----------------------------------------------");
+
+
+
+    console.log("MOSTRAR DONUTS Y CALORIAS:")
+    donut.forEach(donut => {
+        const name = donut.name;
+        const calories = donut.nutrition_facts.nutrition.calories;
+        console.log(`Donut:${name} & Calories:${calories}`);
+    })
+    console.log("MOSTRAR DONUTS Y SUS CARBOHIDRATOS:")
+  
+    donut.forEach(donut => {
+        const name = donut.name;
+        const carbohydrates = donut.nutrition_facts.nutrition.carbohydrate.carbs_detail;
+        
+        console.log(`Donut:${name} & Carbohidratos:`);
+        console.log(carbohydrates);
+      });
+
+    let totalCalories = 0;
+
+    donut.forEach(donut => {
+    const calories = donut.nutrition_facts.nutrition.calories;
+    totalCalories += calories;
+      });
+    const mediaCalories = totalCalories / donut.length;
+    console.log(`La media de calorias con todos los donuts es de:${mediaCalories} calorias`);
+
+    let saturatedCalories = 0;
     
+    donut.forEach(donut => {
+        const saturated = parseFloat(donut.nutrition_facts.nutrition.fat.fat_type.saturated.replace("g", ""));
+        saturatedCalories += saturated;
+    });
+    console.log(`La suma de todas las grasas saturadas es de ${saturatedCalories}g`);
+
+
+    //FALTA REMATAR
+    donut.forEach(donut => {
+        const vitamines = donut.nutrition_facts.nutrition.vitamines;
+        vitamines.forEach(vitamine => {
+            const vitamineName = vitamine.name;
+            const percentage = parseFloat(vitamine.percent.replace("%",""));
+        })
+    })
+
+    //EJERCICIO 3
+     console.log();
+     console.log();
+     console.log();
+     console.log(`                    EJERCICIO 2               `);
+     console.log("----------------------------------------------");
+
+    donut.forEach(donut => {
+        const name = donut.name;
+        const batters = donut.batters.batter;
+        
+        console.log(`Donut: ${name}`);
+        console.log("Butter mass:");
+        
+        batters.forEach(mass => {
+            const type = mass.type;
+            console.log(`* ${type}`);
+        });
+
+        console.log(`------------------------`);
+    })
+
+    donut.forEach(donut => {
+        const name = donut.name;
+        console.log();
+        console.log();
+        console.log(`                    EJERCICIO 3               `);
+        console.log(`Donut: ${name}`);
+        console.log("Extra topping:");
+        
+        topping.forEach(topping => {
+            const type = topping.type;
+            console.log(`* ${type}`);
+        });
+
+        console.log(`------------------------`);
+    })
+
+    //EJERCICIO4
+    console.log();
+    console.log();
+    console.log(`                    EJERCICIO 4               `);
+    console.log("----------------------------------------------");
+
+    let maxSilverCoin = 4;
+    let silverRemaining = [];
+    const priceUni = donut.map(donut => donut.ppu);
+    console.log(priceUni);
+    
+    const boughtDonuts = priceUni.map((price) => {
+        maxSilverCoin = 4;
+        const quantity = Math.floor(maxSilverCoin / price);
+        maxSilverCoin -= quantity * price;
+        silverRemaining.push(maxSilverCoin);
+        return quantity;
+    })
+    
+    donut.forEach((donut,index) => {
+        const name = donut.name;
+        const boughtAmount = boughtDonuts[index];
+        console.log(`Name:${name} & Cantidad comprada ${boughtAmount}`);
+        console.log(`Dinero sobrante: ${silverRemaining[index]} monedas de plata`);
+        
+    })
+
 
 }).catch(error => {
     console.error("Error al obtener los datos:", error);
 });
-
-
-//EJERCICIO2
 
 
 
